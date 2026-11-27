@@ -8,8 +8,7 @@ authors:
 date-released: 2026-11-26
 version: "draft-2026-11-26"
 license: MIT
-# TODO (owner): replace with the real repository URL once the repository exists.
-repository-code: "https://github.com/aqida-ai/TODO-repository-name"
+repository-code: "https://github.com/aqida-ai/tr26-151-problem1"
 # TODO (owner): add the Zenodo DOI once it has been created, as an uncommented line of the form
 # doi: "10.5281/zenodo.TODO"
 # (left as a comment because a non-DOI value would make this file invalid).

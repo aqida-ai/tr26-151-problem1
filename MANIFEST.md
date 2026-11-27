@@ -3,16 +3,16 @@
 # MANIFEST
 
 Every file of this package except the two manifest files, with its size in bytes and its SHA-256.
-Regenerated on 2026-11-27 with Python hashlib after `lean/lake-manifest.json` was added and the workflow
-triggers were changed; the first manifest is kept as `MANIFEST_before_records.md`.
+Regenerated on 2026-11-27 with Python hashlib after the first run on GitHub Actions was recorded
+(`lean/records/ci_run_1.md`); the first manifest is kept as `MANIFEST_before_records.md`.
 
 | file | bytes | SHA-256 |
 |---|---|---|
-| `.github/workflows/lean_verify.yml` | 1679 | `4ab996cadc772516a301027def997d3ffe5938cf904cf67b5bdb8ed345fbde56` |
-| `CITATION.cff` | 1568 | `67c202c7a2e14c7c8a0388307a4c3272cc8de84241b469d13b6c010f2010c554` |
+| `.github/workflows/lean_verify.yml` | 1665 | `9b80e25946d8e00ef14c37fa4e24c1cf1020b10fb747356ce6d2df0fd6d5ee58` |
+| `CITATION.cff` | 1484 | `79233a6cf33d2627646bde308e685c24ac41da75f96e34d2a02f411be1ff8301` |
 | `LICENSE` | 1073 | `5fbdef8c8ba9bca061eb05c4ef84a13891f7cabfdceb29cba167fd0d6cbaf8da` |
 | `LICENSE-PAPER.md` | 994 | `88b2265c5327296ebce6a56e264e5e9332cd1b1eec5c1bb5a77f061f8dd2cb88` |
-| `README.md` | 9664 | `6d2e5c40a79d750ca8dc4dcbba612e8e0560aee25590dee2dd7db1554851b7dd` |
+| `README.md` | 10281 | `35355f47f1212b47564d2c7f4e6a10a3008204f63130424b1fe29f5a056f8d80` |
 | `certificates/three_point_cert_t10_proj.json` | 5218 | `c92141f1ec33811fe2d9d413045aa955713354c00804bf8ff12f1758806fce5e` |
 | `certificates/three_point_cert_t11_proj.json` | 5793 | `5a6176d4197c7893caf8c12868a2707e6a556b55e075fdb448e64b4cac9f0856` |
 | `certificates/three_point_cert_t12_proj.json` | 7924 | `9629ed25e93f9f62c785b76cd6ee5d5f94fd3b641abefa73692052f2ef1d59c2` |
@@ -33,6 +33,7 @@ triggers were changed; the first manifest is kept as `MANIFEST_before_records.md
 | `lean/records/BUILD_RECORD.md` | 30356 | `49c6a746efb9c13787bbf3421e3094460642dfa9b9754065c52982cd3756457e` |
 | `lean/records/axioms_output.txt` | 1773 | `eaad2752500f87db43899638099a0a3d62a2453bcd069ee8adf61999997c8795` |
 | `lean/records/axioms_output_layer_ranks.txt` | 2629 | `9bbed420ca791dfd63a84244ce01145100902af47bfd27d9bf7688e4d4c8268a` |
+| `lean/records/ci_run_1.md` | 2650 | `633af084b3ceee95fd3b181114504336330dcf4281a35f379f60be4264e42e0d` |
 | `lean/records/negative_control_output.txt` | 975 | `0bd48830ed7de50ef81abb26756bcb34e6a40e825d076329159df3c1dc29a672` |
 | `lean/records/verify_by_main_session.txt` | 1457 | `1dcf8c30bfe4e7689761e6a2c00c65e053a91c843f4625bcd7576720e76c1215` |
 | `lean/records/verify_layer_ranks_by_main_session.txt` | 1925 | `ebab1d50bd2f5b9054906b491774a6c87b4576b68b76bf5af51e9a74d6cc7591` |

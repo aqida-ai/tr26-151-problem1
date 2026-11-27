@@ -81,16 +81,18 @@ dimension d of a real representation.
    15.3793..., 16.7398..., 18.4288..., 20.3160..., 22.2756...). The script does not check that the
    blocks are positive semidefinite for every representation; that is the argument of the paper,
    section "Linear bounds for small t". These certificates are checked by this script, not by Lean.
-4. **Continuous integration.** `.github/workflows/lean_verify.yml` runs steps 2 and 3 on GitHub. It has
-   not been executed.
+4. **Continuous integration.** `.github/workflows/lean_verify.yml` runs steps 2 and 3 on GitHub. Its first
+   run (27 November 2026, run 1, commit `7592328`) succeeded in every step; the record is
+   `lean/records/ci_run_1.md`.
 
 ## Clean-machine runbook
 
-**This runbook has not been executed yet.** Prerequisite: elan (the Lean toolchain manager) and git.
-The repository URL is a placeholder until the owner creates the repository.
+The workflow runs these commands on a fresh GitHub runner (first run 27 November 2026, all steps
+succeeded; `lean/records/ci_run_1.md`). They have not been run by hand on a second personal machine.
+Prerequisite: elan (the Lean toolchain manager) and git.
 
 ```bash
-git clone https://github.com/aqida-ai/TODO-repository-name.git tr26_151
+git clone https://github.com/aqida-ai/tr26-151-problem1.git tr26_151
 cd tr26_151/lean
 lake exe cache get
 lake build
@@ -102,8 +104,10 @@ bash check_axioms.sh
 - Lean: Lean 4 version 4.30.0-rc2, Mathlib tag v4.30.0-rc2. `TheoremL.lean` and
   `TheoremL_LayerRanks.lean` both compile with exit code 0 and no `sorry`; `#print axioms` gives
   `[propext, Classical.choice, Quot.sound]` for every main theorem; `NegativeControl.lean` (a planted
-  `sorry`) is reported as depending on `sorryAx`. These checks were run against an existing local Mathlib
-  build; a clean-machine `lake build` has NOT been run yet.
+  `sorry`) is reported as depending on `sorryAx`. These checks were first run against an existing local
+  Mathlib build, and then on a fresh GitHub Actions runner (27 November 2026, run 1, commit `7592328`):
+  `lake exe cache get`, `lake build`, `check_axioms.sh` and the certificate verifier all succeeded. The
+  Mathlib binaries of that run were downloaded from the Mathlib cache, not rebuilt from source.
 - The proofs were read by isolated AI referees; the Lean statements were audited against the definitions
   of TR26-151 by isolated AI readers; no human mathematician has checked the work.
 
@@ -136,14 +140,14 @@ out of a public copy.
 | path | what |
 |---|---|
 | `paper/` | `PAPER_TR26_151_PROBLEM1.tex` with its four input files (`_lean`, `_audit`, `_lit`, `_bib`) and the compiled PDF, copied unchanged |
-| `lean/` | `lean-toolchain`, `lakefile.toml` (two libraries, `TheoremL` and `TheoremL_LayerRanks`; Mathlib `v4.30.0-rc2`), the two Lean files, `NegativeControl.lean` (not built by default), `check_axioms.sh`, `SHA256SUMS.txt` |
+| `lean/` | `lean-toolchain`, `lakefile.toml` (two libraries, `TheoremL` and `TheoremL_LayerRanks`; Mathlib `v4.30.0-rc2`), `lake-manifest.json` (commit pins of Mathlib and its dependencies, the ones the files were compiled against), the two Lean files, `NegativeControl.lean` (not built by default), `check_axioms.sh`, `SHA256SUMS.txt`, `records/` (local build record, recorded compiler outputs, record of the first CI run) |
 | `certificates/` | `three_point_cert_t10_proj.json` ... `three_point_cert_t16_proj.json`, `verify_certificates.py`, `verify_output.txt` |
-| `.github/workflows/lean_verify.yml` | CI workflow (not executed) |
+| `.github/workflows/lean_verify.yml` | CI workflow (first run 27 November 2026: success) |
 | `MANIFEST.md` | size and SHA-256 of every file |
 
 ## Licences and citation
 
 - Code (Lean files, scripts, workflow): MIT, see `LICENSE`.
 - Paper text and PDF: CC BY 4.0, see `LICENSE-PAPER.md`.
-- Citation metadata: `CITATION.cff`. The repository URL and the DOI are TODO placeholders; a Zenodo DOI
-  will be created by the owner later.
+- Citation metadata: `CITATION.cff`. The DOI is a TODO placeholder; a Zenodo DOI will be created by the
+  owner later.
