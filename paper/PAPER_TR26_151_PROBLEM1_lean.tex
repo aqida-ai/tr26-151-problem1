@@ -1,7 +1,8 @@
 % Section "Formal verification" of PAPER_TR26_151_PROBLEM1.tex (same header and claim boundary as the main
 % file). Source of every statement in this section: lean_theorem_l/BUILD_RECORD.md, axioms_output.txt,
 % axioms_output_layer_ranks.txt, verify_by_main_session.txt and verify_layer_ranks_by_main_session.txt
-% (independent re-runs), referee_g10/ (audit of the statements of TheoremL.lean).
+% (independent re-runs), referee_g10/ (audit of the statements of TheoremL.lean). Source of the paragraph
+% "Clean-machine build" (added on 27 November 2026): public_release_tr26_151/lean/records/ci_run_1.md.
 Theorem~\ref{thm:L} and Corollaries~\ref{cor:triples} and~\ref{cor:proj} have been formalised in Lean~4 (version
 4.30.0-rc2) with Mathlib (tag \texttt{v4.30.0-rc2}), in two files of the folder \texttt{lean\_theorem\_l}:
 \texttt{TheoremL.lean} ($1065$ lines, SHA-256 \texttt{3019bee1\,\dots\,6b3cef92}) and
@@ -65,7 +66,17 @@ ranges (formalised over $\R$ only); Remark~\ref{rem:k}; the statements of Sectio
 Section~\ref{sec:linear} (the certificates of Theorem~\ref{thm:cert} are checked by exact-arithmetic scripts,
 not by Lean). The declarations marked $^{\ast}$ were added after the first audit; a second isolated
 reader then compared them with the mathematics (\texttt{referee\_g11}) and found them aligned, with caveats
-about coverage that are all listed in this paragraph. A build kit for a clean machine
-(\texttt{lakefile.toml}, \texttt{lean-toolchain}, \texttt{README\_BUILD.md}) is provided but was not executed;
-the checks above were run against an existing Mathlib build. No proof checker other than the Lean kernel was
-used.
+about coverage that are all listed in this paragraph.
+
+\paragraph{Clean-machine build (added on 27 November 2026).} The checks above were run against an existing
+Mathlib build, on the machine on which the files were written. The build kit for a clean machine
+(\texttt{lakefile.toml}, \texttt{lean-toolchain} and the workflow \texttt{lean\_verify}) was then executed on a
+fresh GitHub-hosted runner, by GitHub Actions (run~1 of the workflow, 27~November 2026), and every step
+succeeded. The build of the two files printed $27$ lines of \texttt{\#print axioms} output ($10$ from the
+first file, $17$ from the second), each naming exactly \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound}; the planted \texttt{sorry} of the negative control was reported as \texttt{sorryAx}; and
+the exact-arithmetic verifier accepted all seven certificates of Theorem~\ref{thm:cert}. The record of the run
+is the file \texttt{lean/records/ci\_run\_1.md} of the repository
+\url{https://github.com/aqida-ai/tr26-151-problem1}. That run used the same version of Lean and the same
+Mathlib as the first checks, and the Mathlib binaries were downloaded from the Mathlib cache, not rebuilt. No
+proof checker other than the Lean kernel was used.
