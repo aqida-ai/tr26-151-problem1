@@ -1,0 +1,404 @@
+% AQIDA_CONSTITUTIONAL_SCOPE: gate
+% THEORY_BINDING_MAP:
+% - CORE_LOGIC v3, A9 and A10 (an energy has no cross-cancellation): Theorem 1 uses a positive form exactly
+%   once (an isometry does not increase norms; for vectors: Cauchy-Schwarz). Section 5 shows that the complex
+%   bilinear (Minkowski) representation satisfies every other step. Section 6 uses energies tr(X* g X) >= 0.
+% - CORE_LOGIC v3, section 2.2 (a zero carries its witness): the space N of Section 3 consists of the
+%   coefficient arrays whose restriction to every layer is a linear relation of that layer.
+% - n_s_u: explicit mechanism rows: Table 1.  elm_eulerian, e_i/squaring/AQiDA_Physics/Chess_Cybertron: not used.
+% CLAIM_BOUNDARY: unified manuscript of gate row 19 of DRIFT_LOCK.md. Claims: Theorem 1 and its corollaries
+%   (a bound of order t^2 for the real, Hermitian and projective dimension of the triple graph, which is what
+%   Problem 1 of ECCC TR26-151 asks for), and the linear bounds of Section 6. Verification status is stated in
+%   Section 7 and in the footnote of the title; nothing here has been peer reviewed. No claim about Hurwitz's
+%   problem.
+% FALSIFICATION_TESTS: the Lean development of Section 7; cube_layer_theorem_check.py and
+%   cube_pointwise_bound_check.py (the Minkowski Gram matrix must violate the bound); the certificate files.
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+\newcommand{\Gt}{G_t}
+\newcommand{\Hn}{H_n}
+
+\title{A quadratic lower bound for real orthogonal representations\\ of the graph of triples\thanks{Draft of
+26 November 2026. Produced with an AI system (see the statement before the references). Not peer reviewed.
+Verification status: Section~\ref{sec:lean}.}}
+\author{Babar Ahmed Khan}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $\Gt$ be the graph whose vertices are the $3$-subsets of $[t]$, two of them being adjacent when they share
+exactly one element (the generalised Johnson graph $J(t,3,1)$). An orthogonal representation assigns a non-zero
+vector to each vertex so that adjacent vertices get orthogonal vectors. Hrube\v{s} and Iyer asked for a proof
+that over the real numbers the least dimension $d_\R(t)$ is of order $t^2$; over $\C$ with the bilinear form
+dimension $t+1$ suffices, and the Lov\'asz number of the graph, the classical lower bound, is about $3t/4$.
+We prove
+\[ d_\R(t)\;\ge\;\tfrac15\,\floor{t/3}^2 , \]
+so that $d_\R(t)=\Theta(t^2)$. The proof is one page of linear algebra: it counts linear relations inside the
+layers of a three-dimensional cube and uses the positivity of the inner product once. The same bound holds for
+complex vectors with the Hermitian form and for representations by projectors of any rank, hence for the
+projective rank and the quantum chromatic number of $J(t,3,1)$. The complex bilinear representation satisfies
+every step of the proof except the one that uses positivity. For small $t$, where the quadratic bound is weak,
+we give bounds of a different kind: an explicit bound $(\sqrt3-o(1))\,t$, the inequality $d_\R(t)\ge t+2$ for
+every $t\ge 11$, and exact certificates for $t=10,\dots,16$. The quadratic bounds (for real and Hermitian
+vectors and for subspaces) and the upper bound $t^2$ have been formalised in Lean~4 with Mathlib; the linear
+bounds have not.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The problem}
+For a field $\K\in\{\R,\C\}$ a \emph{representation} of $\Gt$ in dimension $d$ is a family of non-zero vectors
+$v_A\in\K^d$, one for each $3$-subset $A$ of $[t]$, with $\ip{v_A}{v_B}=0$ whenever $|A\cap B|=1$; here
+$\ip{\cdot}{\cdot}$ is the standard inner product (Hermitian over $\C$). We write $d_\R(t)$ and $d_{\mathrm H}(t)$
+for the least dimension over $\R$ and over $\C$. In the notation of Hrube\v{s} and Iyer~\cite{HI},
+$d_\R(t)=\dim_\R(\overline{J(t,3,1)})$. Their Problem~1 reads: ``Show that
+$\dim_\R(\overline{J(n,3,1)})\ge\Omega(n^2)$'' (their $n$ is our $t$). They record the trivial bounds
+$\Omega(t)\le\dim_\R\le O(t^2)$, the bound $t+1$ for the bilinear form over $\C$ (realised by the vectors
+$(1_A,i)$, for which $(1_A,1_B)-1=|A\cap B|-1$), and a bound $\Omega(t^2)$ over fields of characteristic two.
+Their method for real representations of Cayley graphs is a linear programme whose value is the Lov\'asz
+number~\cite{Lo} \cite[Lemma~22 and~(8)]{HI}. For $\Gt$ the Lov\'asz bound is
+$1+3\binom{t-3}2/(2t-11)\approx 3t/4$ for $t\ge14$ (our computation). The upper bound $O(t^2)$ is elementary: give each triple the basis vector indexed by one
+of its pairs.
+
+\subsection{Results}
+The \emph{cube graph} $\Hn$ has vertex set $[n]^3$; two points are adjacent when they agree in exactly one
+coordinate. If $[t]$ contains three disjoint $n$-sets $X,Y,Z$, the triples $\{x,y,z\}$ with $x\in X$, $y\in Y$,
+$z\in Z$ form a copy of $\Hn$ inside $\Gt$: two of them share exactly one element exactly when they agree in
+exactly one coordinate. A \emph{layer} of the cube is a set $\{p: p_i=a\}$ ($3n$ layers, $n^2$ points each).
+
+\begin{theorem}\label{thm:L}
+Let $\K\in\{\R,\C\}$, let $E$ be a finite-dimensional inner-product space over $\K$ and $r\ge1$. Suppose that
+to every point $p\in[n]^3$ there is assigned a linear isometry $U_p\colon\K^r\to E$ such that the ranges of
+$U_p$ and $U_q$ are orthogonal whenever $p$ and $q$ are adjacent in $\Hn$. For a layer $\Lambda$ let
+$\rank(\Lambda)$ be the dimension of the span of the ranges of the $U_p$, $p\in\Lambda$. Then
+\[ \sum_{\Lambda}\rank(\Lambda)\;\ge\;\tfrac35\,r\,n^3 ,\qquad\text{and hence}\qquad
+   \dim E\;\ge\;\tfrac15\,r\,n^2 . \]
+\end{theorem}
+
+For $r=1$ this is a statement about unit vectors $u_p=U_p(1)$: \emph{if unit vectors $u_p$, $p\in[n]^3$, are
+orthogonal whenever two points agree in exactly one coordinate, they span at least $n^2/5$ dimensions.}
+
+\begin{corollary}\label{cor:triples}
+For every $t$: $d_\R(t)\ge\floor{t/3}^2/5$ and $d_{\mathrm H}(t)\ge\floor{t/3}^2/5$. Consequently
+$d_\R(t)=\Theta(t^2)$, which answers Problem~1 of~\cite{HI}.
+\end{corollary}
+
+\begin{corollary}\label{cor:proj}
+If orthogonal projectors $P_A$ of rank $r$ on $\K^D$ are assigned to the $3$-subsets of $[t]$ with $P_AP_B=0$
+whenever $|A\cap B|=1$, then $D/r\ge\floor{t/3}^2/5$. Hence the projective rank $\xi_f$ and the quantum
+chromatic number $\chi_q$ satisfy
+$\chi_q(J(t,3,1))\ge\xi_f(J(t,3,1))\ge\floor{t/3}^2/5$.
+\end{corollary}
+
+So the real, the Hermitian and the projective dimension of this graph are all of order $t^2$, while its
+Lov\'asz number and its complex bilinear dimension are of order $t$.
+
+\subsection{Where positivity enters}
+The proof of Theorem~\ref{thm:L} uses the positivity of the form in one line: an isometry $U_p$ satisfies
+$\norm{U_p^*a}\le\norm a$ (for $r=1$ this is the Cauchy--Schwarz inequality). Section~\ref{sec:mink} shows
+that the complex bilinear representation, which lives in a space with one negative direction, satisfies every
+other step, and violates exactly this one as soon as $n\ge4$.
+
+\subsection{Small $t$}
+Corollary~\ref{cor:triples} exceeds the complex bilinear bound $t+1$ only for $t\ge48$. For small $t$ we use a
+different method (moments of the representation up to order three), which gives:
+\begin{itemize}
+\item an explicit bound $d\ge(\sqrt3-o(1))\,t$ valid for every $t\ge7$ (Theorem~\ref{thm:A});
+\item $d_\R(t)\ge t+2$ and $d_{\mathrm H}(t)\ge t+2$ for \emph{every} $t\ge11$ (Theorem~\ref{thm:tplus2});
+\item $d\ge 11,14,16,17,19,21,23$ for $t=10,\dots,16$, by certificates checked in exact arithmetic
+(Theorem~\ref{thm:cert}).
+\end{itemize}
+These bounds hold for projectors of every rank, and Proposition~\ref{prop:proj} shows that for that reason the
+method cannot give more than $25/2$ at $t=10$. Table~\ref{tab:bounds} compares the bounds; the closed bound of
+Theorem~\ref{thm:A} is the better one up to $t=74$, Corollary~\ref{cor:triples} from $t=75$ on.
+
+\begin{table}[ht]\centering
+\begin{tabular}{rrrrrrl}
+\toprule
+$t$ & Lov\'asz & Thm.~\ref{thm:A} & Thm.~\ref{thm:cert} & Cor.~\ref{cor:triples} & $t+1$ & best representation known\\
+\midrule
+9 & 7.43 & 7.99 & -- & 1.8 & 10 & 8 (exact value)\\
+10 & 8.00 & 9.56 & 11 & 1.8 & 11 & 15\\
+11 & 8.64 & 11.16 & 14 & 1.8 & 12 & 18 (numerical)\\
+12 & 9.31 & 12.79 & 16 & 3.2 & 13 & \\
+13 & 10.00 & 14.44 & 17 & 3.2 & 14 & \\
+16 & 12.14 & 19.47 & 23 & 5.0 & 17 & \\
+48 & 35.94 & 74.60 & -- & 51.2 & 49 & \\
+78 & 58.41 & 126.55 & -- & 135.2 & 79 & \\
+100 & 74.90 & 164.65 & -- & 217.8 & 101 & \\
+1000 & 749.88 & 1723.51 & -- & 22177.8 & 1001 & at most $\binom{1000}{2}$\\
+\bottomrule
+\end{tabular}
+\caption{Columns 2 to 5: lower bounds for the dimension of a representation of $\Gt$ by real or Hermitian unit
+vectors. Column 6: the dimension of the complex bilinear representation. Column 7: the smallest dimension of a
+real representation that we know.}
+\label{tab:bounds}
+\end{table}
+
+\section{Notation}
+$P=[n]^3$. For $p\in P$ and $i\in\{1,2,3\}$, the \emph{line} $\ell_i(p)$ is the set of the $n$ points that agree
+with $p$ outside coordinate $i$. Two distinct points of a line agree in two coordinates; a point $q\ne p$ of
+$\ell_i(p)$ and a point $q'\ne p$ of $\ell_j(p)$, $i\ne j$, agree in exactly one coordinate. The layer through
+$p$ in which coordinate $h$ is fixed contains $\ell_i(p)\cup\ell_j(p)$ ($\{i,j,h\}=\{1,2,3\}$), and each of its
+other points agrees with $p$ in coordinate $h$ only. Inner products are linear in the first argument. An
+isometry $U\colon\K^r\to E$ satisfies $U^*U=I_r$, and the ranges of $U_p$, $U_q$ are orthogonal exactly when
+$U_p^*U_q=0$.
+
+\section{Proof of Theorem~\ref{thm:L}}\label{sec:proof}
+An \emph{array} is an element $v=(v_p)_{p\in P}$ of $(\K^r)^P$, with $\norm v^2=\sum_p\norm{v_p}^2$. For a set
+$S\subseteq P$ put $\sigma_S(v)=\sum_{p\in S}U_pv_p\in E$.
+
+\smallskip\noindent\textbf{Step 1 (relations).} Let $N$ be the space of arrays $v$ with $\sigma_\Lambda(v)=0$
+for every layer $\Lambda$. It is the kernel of a linear map from $(\K^r)^P$ into the direct sum, over the
+layers, of the spans of the layers, so
+\begin{equation}\label{eq:rn}
+\dim N\;\ge\; r\,n^3-\sum_\Lambda\rank(\Lambda).
+\end{equation}
+
+\noindent\textbf{Step 2 (the value $\tfrac12$).} Let $v\in N$, $p\in P$, and $a_i=\sigma_{\ell_i(p)}(v)$ for
+$i=1,2,3$. Then
+\begin{equation}\label{eq:half}
+U_p^*a_i=\tfrac12\,v_p\qquad(i=1,2,3).
+\end{equation}
+Indeed, let $\Lambda$ be the layer through $p$ with coordinate $3$ fixed. Applying $U_p^*$ to
+$\sigma_\Lambda(v)=0$ gives $\sum_{q\in\Lambda}U_p^*U_qv_q=0$. The points of $\Lambda$ outside
+$\ell_1(p)\cup\ell_2(p)$ are adjacent to $p$ and contribute nothing; $p$ lies on both lines and
+$U_p^*U_p=I_r$. So $U_p^*a_1+U_p^*a_2=v_p$. The two other layers through $p$ give
+$U_p^*a_1+U_p^*a_3=v_p$ and $U_p^*a_2+U_p^*a_3=v_p$, and the three equations give~\eqref{eq:half}.
+
+\smallskip\noindent\textbf{Step 3 (norms and orthogonality).} For every line $\ell$ and $a=\sigma_\ell(v)$,
+applying~\eqref{eq:half} at each point $q$ of $\ell$ (with the same line),
+\begin{equation}\label{eq:norm}
+\norm a^2=\sum_{q\in\ell}\ip{a}{U_qv_q}=\sum_{q\in\ell}\ip{U_q^*a}{v_q}=\tfrac12\sum_{q\in\ell}\norm{v_q}^2 .
+\end{equation}
+For $i\ne j$ we have $\ip{a_i}{a_j}=0$: in
+$\ip{a_i}{a_j}=\sum_{q\in\ell_i(p)}\sum_{q'\in\ell_j(p)}\ip{U_qv_q}{U_{q'}v_{q'}}$ the terms with $q\ne p\ne q'$
+vanish, because such $q,q'$ are adjacent; the terms with $q=p$ add up to
+$\ip{U_pv_p}{a_j}=\ip{v_p}{U_p^*a_j}=\tfrac12\norm{v_p}^2$, those with $q'=p$ to
+$\ip{a_i}{U_pv_p}=\tfrac12\norm{v_p}^2$, and the term $q=q'=p$, which lies in both groups and is therefore subtracted once, is $\norm{v_p}^2$; the
+total is $(\tfrac12+\tfrac12-1)\norm{v_p}^2=0$.
+
+\smallskip\noindent\textbf{Step 4 (positivity).} Let $a=a_1+a_2+a_3$. By~\eqref{eq:half},
+$U_p^*a=\tfrac32v_p$. By Step~3 and since the three lines through $p$ meet only in $p$,
+\[ \norm a^2=\tfrac12\sum_{i=1}^3\sum_{q\in\ell_i(p)}\norm{v_q}^2\;\le\;\tfrac12\bigl(\norm v^2+2\norm{v_p}^2\bigr). \]
+Because $U_p$ is an isometry, $\norm{U_p^*a}\le\norm a$. Hence
+$\tfrac94\norm{v_p}^2\le\tfrac12\norm v^2+\norm{v_p}^2$, that is,
+\begin{equation}\label{eq:pb}
+5\,\norm{v_p}^2\;\le\;2\,\norm v^2\qquad\text{for every }v\in N\text{ and every }p\in P .
+\end{equation}
+
+\noindent\textbf{Step 5 (dimension).} Let $\Pi$ be the orthogonal projection of $(\K^r)^P$ onto $N$ and
+$\Pi_p$ its diagonal block at $p$, a positive semidefinite $r\times r$ matrix. For $c\in\K^r$ the array
+$v=\Pi(c\text{ at }p)$ lies in $N$, with $v_p=\Pi_pc$ and $\norm v^2=\ip{\Pi_pc}{c}$. By~\eqref{eq:pb},
+$5\norm{\Pi_pc}^2\le2\ip{\Pi_pc}{c}$, so every eigenvalue of $\Pi_p$ is at most $\tfrac25$ and
+$\tr\Pi_p\le\tfrac25r$. Therefore $\dim N=\tr\Pi=\sum_p\tr\Pi_p\le\tfrac25\,r\,n^3$.
+
+\smallskip\noindent\textbf{Step 6.} With~\eqref{eq:rn}: $\sum_\Lambda\rank(\Lambda)\ge\tfrac35rn^3$. There are
+$3n$ layers, each of rank at most $\dim E$; so $\dim E\ge\tfrac15rn^2$. \qed
+
+\begin{remark}
+For the $27$ vectors of Section~\ref{sec:mink} at $n=3$ and $v$ the projection of a basis array, the
+inequality $\norm{U_p^*a}\le\norm a$ of Step~4 is an equality; the loss is in the estimate of $\norm a^2$, and
+$\tr\Pi_p=8/27<\tfrac25$ there. A first version of the argument, which applied Pythagoras to the three
+subspaces $\{\sigma_{\ell_i(p)}(v):v\in N\}$, gave the constant $1/9$ in place of $1/5$. We did not try to
+optimise the constant; for $\Hn$ the truth lies between $n^2/5$ and $n^2$ (one colour for each line of a fixed
+direction), and between $n^2/5$ and $2n^2/3$ when $3$ divides $n$.
+\end{remark}
+
+\section{Consequences}
+
+\begin{proof}[Proof of Corollary~\ref{cor:triples}]
+Let $n=\floor{t/3}$ and choose disjoint $n$-sets $X,Y,Z\subseteq[t]$. Normalise the vectors of the triples
+$\{x,y,z\}$, $x\in X$, $y\in Y$, $z\in Z$; they are unit vectors indexed by $[n]^3$, orthogonal whenever two
+points agree in exactly one coordinate. Theorem~\ref{thm:L} with $r=1$ gives $d\ge n^2/5$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:proj}]
+A projector of rank $r$ is $U U^*$ for an isometry $U\colon\K^r\to\K^D$, and $P_AP_B=0$ means that the ranges
+are orthogonal. Restricting to the transversal triples as above, Theorem~\ref{thm:L} gives $D\ge rn^2/5$.
+The projective rank $\xi_f(G)$ is the infimum of $D/r$ over such assignments of projectors to the vertices of
+$G$ with orthogonal projectors on adjacent vertices, and $\xi_f(G)\le\chi_q(G)$; see Section~\ref{sec:lit}
+for the sources and conventions.
+\end{proof}
+
+\begin{remark}[More coordinates]\label{rem:k}
+The same proof applies to $[n]^k$, $k\ge3$, with orthogonality required for points at Hamming distance exactly
+two, taking as layers the $\binom k2n^{k-2}$ two-dimensional planes. The $k$ line sums satisfy
+$U_p^*a_i=\tfrac12v_p$, Step~4 gives $(k^2-2k+2)\norm{v_p}^2\le2\norm v^2$, and one obtains
+$\dim E\ge\frac{2(k-2)}{(k-1)(k^2-2k+2)}\,r\,n^2$. For the graph $J(t,k,k-2)$ this is a bound of order $t^2$
+for each fixed $k$.
+\end{remark}
+
+\section{The complex bilinear representation}\label{sec:mink}
+On $[n]^3$ consider the symmetric bilinear form with Gram matrix
+$G(p,q)=\tfrac12(\#\{i:p_i=q_i\}-1)$. It has unit diagonal and vanishes on adjacent pairs; it is the
+restriction to the transversal triples of the form $(1_A,1_B)-1$ behind the bilinear representation of
+dimension $t+1$. Its rank is $3n-2$ for $n\ne3$, and it has exactly one negative eigenvalue when $n>3$; for
+$n=3$ it is positive semidefinite of rank $6$ (the $27$ vectors are roots of $E_6$, and for $t=9$ the $84$ vectors $1_A-\tfrac13\mathbf 1$ are roots of
+$E_8$).
+
+Define $N$ as the space of arrays whose restriction to every layer lies in the kernel of the Gram matrix of
+that layer. Steps~1, 2 and~3 are identities between entries of the Gram matrix and hold verbatim. Here
+$N$ consists of the arrays whose sum along every line is zero, $\dim N=(n-1)^3$, and the diagonal entries of
+the projection onto $N$ equal $((n-1)/n)^3$. This exceeds $\tfrac25$ exactly when $n\ge4$, so the conclusion~\eqref{eq:pb} of
+Step~4 fails there; the form is indefinite for $n\ge4$, and $\norm{U_p^*a}\le\norm a$ is the only step of the
+proof that uses positivity. The proof thus separates the bilinear representation from a real one through
+that single inequality.
+(Numerically: $0.296$ at $n=3$; $0.422,\ 0.512,\ 0.579,\ 0.670$ at $n=4,5,6,8$.)
+
+\section{Linear bounds for small $t$}\label{sec:linear}
+The bounds of this section hold for projective representations: orthogonal projectors $P_A$ of rank $r$ on
+$\R^D$ or $\C^D$ with $P_AP_B=0$ on adjacent pairs; the \emph{cost} is $d=D/r$, and vectors are the case
+$r=1$. Put $L(X)=\tr(X)/r$, $W_{AB}=L(P_AP_B)$ and $T_{ABC}=\operatorname{Re}L(P_AP_BP_C)$. Then
+$W_{AB}\ge0$, $W_{AA}=1$, $W_{AB}=0$ on adjacent pairs, $T$ is symmetric, $T_{AAB}=W_{AB}$, and $T_{ABC}=0$ as
+soon as one of the three pairs is adjacent. For a positive semidefinite operator $g$ and $X_0=1$, $X_B=P_B$
+the matrix $[L(X_i^*gX_j)]$ is positive semidefinite. We use $g=1$ (\emph{two-point block}: $W-J/d\succeq0$),
+$g=P_A$ (\emph{vertex block}: the matrix $[T_{ABC}]_{B,C}$ over the triples not adjacent to $A$), and
+$g=1-\sum_{A\in Q}P_A$ for a clique $Q$ (\emph{clique block}; this $g$ is a projector). All conditions are preserved by averaging over
+the symmetric group; after averaging $W$ takes a value $w_1$ on pairs sharing two elements and $w_3$ on
+disjoint pairs, and $T$ takes four values $T_s$ (three triples through a common pair), $T_k$ (three triples in
+a $4$-set), $T_p$ (two triples sharing a pair, the third disjoint from both), $T_d$ (three pairwise disjoint
+triples).
+
+Let $m=t-3$, $V=\binom t3$, $N_3=\binom m3$, and for $0\le w\le\tfrac13$
+\[ \kappa_m=\frac{4m^4(m-1)}{9(m-3)},\qquad
+F_m(w)=1+3mw+\tfrac12\Bigl[\tfrac m3+\sqrt{\tfrac{m^2}9+\kappa_m\,w(1-3w)}\,\Bigr]. \]
+
+\begin{theorem}\label{thm:A}
+Let $t\ge7$. Every projective representation of $\Gt$, over $\R$ or over $\C$ with the Hermitian form, has cost
+at least $V/\max_{0\le w\le1/3}F_m(w)\ge V/\Phi(m)$, where
+$\Phi(m)=1+\tfrac{2m}3+\sqrt{\bigl(\tfrac{3m^2}{\kappa_m}+\tfrac14\bigr)\bigl(\tfrac{m^2}9+\tfrac{\kappa_m}{12}\bigr)}$, and
+$V/\Phi(m)=\bigl(\sqrt3-(12-2\sqrt3)/m+O(m^{-2})\bigr)\,t$.
+\end{theorem}
+
+\begin{proof}
+A triple shares two elements with $3m$ others and is disjoint from $N_3$ others. We use five consequences of
+the blocks.
+(1) The two-point block tested on the constants: $d\ge V/\sigma$, $\sigma=1+3mw_1+N_3w_3$.
+(2) Bessel's inequality for the clique $\{abp,acq,bcr,pqr\}$ tested against $abc$: $3w_1+w_3\le1$.
+(3) The vertex block of a triple $A$, compressed to the span of $e_A$, of the indicator of the $3m$ triples
+sharing two elements with $A$, and of the indicator of the $N_3$ triples disjoint from $A$, is the positive
+semidefinite matrix
+\[\begin{pmatrix}1&3mw_1&N_3w_3\\ 3mw_1&3m\bigl(w_1+(m-1)T_s+2T_k\bigr)&3m\tbinom{m-1}3T_p\\
+N_3w_3&3m\tbinom{m-1}3T_p&N_3\bigl(w_3+3(m-3)T_p+\tbinom{m-3}3T_d\bigr)\end{pmatrix},\]
+whose Schur complements give
+(S1) $3m(w_1+(m-1)T_s+2T_k)\ge9m^2w_1^2$ and (S2) $w_3+3(m-3)T_p+\binom{m-3}3T_d\ge N_3w_3^2$.
+(4) For a function $\varphi$ on the $m$ points outside $A$ with $\sum\varphi=0$, $\sum\varphi^2=1$, testing the
+vertex block on $(e,x)\mapsto\varphi(x)/\sqrt3$ (triples $e\cup\{x\}$, $e$ a pair of $A$) and on
+$C\mapsto\sum_{x\in C}\varphi(x)/\sqrt{\nu}$, $\nu=\binom{m-2}2$, gives a positive semidefinite $2\times2$ matrix
+with diagonal entries $\mathcal A=w_1-T_s+2T_k$ and
+$\mathcal B=w_3+(2m-9)T_p-\tfrac{(m-4)(m-5)}2T_d$ and off-diagonal entry $-\sqrt{3\nu}\,T_p$; hence
+(D2) $\mathcal A\mathcal B\ge3\binom{m-2}2T_p^2$.
+(5) The component of the vertex block with sum zero over the pairs of $A$ and over the outside points:
+$w_1-T_s-T_k\ge0$.
+
+By (5), $T_k\le w_1-T_s$; with (S1), $(m-3)T_s\ge3mw_1^2-3w_1$, hence
+$\mathcal A\le3(w_1-T_s)\le3mw_1(1-3w_1)/(m-3)$. By (D2),
+$\tfrac{(m-4)(m-5)}2T_d\le w_3+(2m-9)T_p-3\binom{m-2}2T_p^2/\mathcal A$ (if $\mathcal A=0$ then $T_p=0$ by
+(D2), and the last term is read as $0$); multiplying by $(m-3)/3$, using
+$\binom{m-3}3=\tfrac{m-3}3\cdot\tfrac{(m-4)(m-5)}2$ and comparing with (S2),
+\[N_3w_3^2\le\tfrac m3w_3+\tfrac{2m(m-3)}3T_p-\tfrac{(m-3)\binom{m-2}2}{\mathcal A}T_p^2
+\le\tfrac m3w_3+\frac{2m^2\mathcal A}{9(m-2)},\]
+the last step being the maximum of a quadratic polynomial in $T_p$. With $y=N_3w_3$ this is
+$y^2-\tfrac m3y-\tfrac{2N_3m^2\mathcal A}{9(m-2)}\le0$, so
+$y\le\tfrac12\bigl[\tfrac m3+\sqrt{m^2/9+8N_3m^2\mathcal A/(9(m-2))}\bigr]$. The right-hand side increases
+with $\mathcal A$; inserting the bound for
+$\mathcal A$ and $8N_3m^3/(3(m-2)(m-3))=\kappa_m$ gives $\sigma\le F_m(w_1)$, and $0\le w_1\le\tfrac13$ by (2).
+For the maximum put $\eta=w-\tfrac16$, so that $w(1-3w)=\tfrac1{12}-3\eta^2$; by the Cauchy--Schwarz inequality
+$3m\eta+\tfrac12\sqrt{m^2/9+\kappa_m/12-3\kappa_m\eta^2}\le\sqrt{(3m^2/\kappa_m+\tfrac14)(m^2/9+\kappa_m/12)}$.
+\end{proof}
+
+\begin{theorem}\label{thm:tplus2}
+$d_\R(t)\ge t+2$ and $d_{\mathrm H}(t)\ge t+2$ for every $t\ge11$. In particular the real dimension exceeds the
+dimension $t+1$ of the complex bilinear representation for every $t\ge11$.
+\end{theorem}
+\begin{proof}
+For $t=11,12$ this is Theorem~\ref{thm:cert}. Let $t\ge13$ and $m=t-3=10+s$, $s\ge0$. By
+Theorem~\ref{thm:A} it suffices that $V/\Phi(m)>t+1$, that is $\mathcal L>\sqrt{\mathcal Q}$ with
+$\mathcal L=V/(t+1)-1-2m/3$ and $\mathcal Q=(3m^2/\kappa_m+\tfrac14)(m^2/9+\kappa_m/12)$. One computes
+$\mathcal L=(s^3+32s^2+329s+1072)/(6(s+14))$ and
+$\mathcal L^2-\mathcal Q=\mathcal P(s)/\mathcal D(s)$ with
+\begin{align*}
+\mathcal P(s)&=s^8+77s^7+2528s^6+45938s^5+500519s^4+3293219s^3\\
+&\quad+12363712s^2+22285350s+10306926,\\
+\mathcal D(s)&=54s^4+2376s^3+38178s^2+264600s+666792.
+\end{align*}
+All coefficients are positive. So the cost exceeds $t+1$, and a dimension is an integer.
+\end{proof}
+
+\begin{theorem}\label{thm:cert}
+For $t=10,11,\dots,16$ every projective representation of $\Gt$ has cost at least
+$10.133$, $13.634$, $15.379$, $16.739$, $18.428$, $20.316$, $22.275$. Hence $d_\R(t)$ and $d_{\mathrm H}(t)$ are
+at least $11,14,16,17,19,21,23$.
+\end{theorem}
+\begin{proof}
+Each bound is the sum, with positive rational multipliers, of seven inequalities $u^{\mathsf T}M(x)u\ge0$,
+where $M$ is the two-point block, the vertex block, or the clique block of a Fano plane or of a maximal star
+of triples through a point, evaluated at $x=(d,w_1,w_3,T_s,T_k,T_p,T_d)$, and $u$ is an integer vector; the
+weighted sum is the inequality $d-\beta\ge0$. The vectors and multipliers are in the files
+\texttt{three\_point\_cert\_t\{10,\dots,16\}\_proj.json}; verifying a certificate needs integer arithmetic
+only.
+\end{proof}
+
+\begin{proposition}\label{prop:proj}
+$G_{10}$ has a projective representation of rank $2$ in dimension $25$ (cost $25/2$). Hence no argument that
+is valid for projectors of every rank proves more than $12.5$ at $t=10$, where the best representation by
+vectors that we know has dimension $15$.
+\end{proposition}
+\begin{proof}
+For a triple $A$ inside the first nine points let $\rho_A=1_A-\tfrac13\mathbf 1\in\R^9$; then
+$\ip{\rho_A}{\rho_B}=|A\cap B|-1$, and the $\rho_A$ span a space $E_0$ of dimension $8$. Give $A$ the plane
+$\rho_A\otimes\R^2$ in $E_0\otimes\R^2$ (dimension $16$), and give a triple $\{a,b,10\}$ the coordinate plane of
+$e_a,e_b$ in a further $\R^9$. Two triples through the point $10$ are adjacent exactly when their pairs are
+disjoint, and planes in different summands are orthogonal.
+\end{proof}
+
+By Corollary~\ref{cor:proj} the projective cost is nevertheless of order $t^2$; the moment method of this
+section simply does not see it.
+
+\section{Formal verification}\label{sec:lean}
+\input{PAPER_TR26_151_PROBLEM1_lean.tex}
+
+\section{Related work, remarks and open questions}\label{sec:lit}
+\input{PAPER_TR26_151_PROBLEM1_lit.tex}
+
+\paragraph{Statement on the production of this manuscript.}
+The mathematics, the computations and the text were produced with an AI system (Claude) under the direction
+of the author, in a run that kept a written control file with a gate before each attempt. Intermediate
+versions of every result were read by isolated AI referees with their own code. No human mathematician had
+checked the manuscript when it was written.
+
+\begin{thebibliography}{99}
+\bibitem{HI} P.~Hrube\v{s} and S.~Iyer, \emph{Sparse polynomials and orthogonal representations of
+combinatorial graphs}, Electronic Colloquium on Computational Complexity, Report TR26-151, 2026.
+\bibitem{H24} P.~Hrube\v{s}, \emph{A subquadratic upper bound on sum-of-squares composition formulas},
+Computational Complexity Conference (CCC), 2024.
+\bibitem{Lo} L.~Lov\'asz, \emph{On the Shannon capacity of a graph}, IEEE Trans.\ Inform.\ Theory 25 (1979),
+1--7.
+\input{PAPER_TR26_151_PROBLEM1_bib.tex}
+\end{thebibliography}
+\end{document}

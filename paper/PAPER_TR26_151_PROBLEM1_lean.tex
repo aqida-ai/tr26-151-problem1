@@ -1,0 +1,71 @@
+% Section "Formal verification" of PAPER_TR26_151_PROBLEM1.tex (same header and claim boundary as the main
+% file). Source of every statement in this section: lean_theorem_l/BUILD_RECORD.md, axioms_output.txt,
+% axioms_output_layer_ranks.txt, verify_by_main_session.txt and verify_layer_ranks_by_main_session.txt
+% (independent re-runs), referee_g10/ (audit of the statements of TheoremL.lean).
+Theorem~\ref{thm:L} and Corollaries~\ref{cor:triples} and~\ref{cor:proj} have been formalised in Lean~4 (version
+4.30.0-rc2) with Mathlib (tag \texttt{v4.30.0-rc2}), in two files of the folder \texttt{lean\_theorem\_l}:
+\texttt{TheoremL.lean} ($1065$ lines, SHA-256 \texttt{3019bee1\,\dots\,6b3cef92}) and
+\texttt{TheoremL\_LayerRanks.lean} ($1354$ lines, SHA-256 \texttt{a1b16696\,\dots\,21adeefd}), whose first
+$1065$ lines are the first file, byte for byte. The full hashes are in the build record. Neither file contains
+\texttt{sorry}, an added axiom or \texttt{native\_decide}. The main declarations are:
+\begin{center}\small
+\begin{tabular}{@{}p{0.39\textwidth}p{0.58\textwidth}@{}}
+\toprule
+declaration & statement\\
+\midrule
+\texttt{core\_bound} & orthonormal $r$-frames $u(p,\cdot)$ in a real space $E$, orthogonal on adjacent
+points: $r\,n^2\le5\dim E$\\
+\texttt{core\_layer\_ranks}$^{\ast}$ & the same hypotheses: $3\,r\,n^3\le5\sum_\Lambda\rank(\Lambda)$
+(Theorem~\ref{thm:L} over $\R$)\\
+\texttt{theorem\_L\_real} & unit vectors in $\R^d$: $n^2\le5d$ \ (\texttt{\_nine}: $n^2\le9d$)\\
+\texttt{theorem\_L\_complex\_hermitian} & unit vectors in $\C^d$, Hermitian form: $n^2\le5d$\\
+\texttt{theorem\_L\_projective} & subspaces of dimension $r$ of a real space: $r\,n^2\le5\dim E$\\
+\texttt{theorem\_L\_projective\_complex} & the same over $\C$\\
+\texttt{theorem\_L\_projectors} & self-adjoint operators on $\R^D$ with ranges of dimension $r$ and
+$P_pP_q=0$ on adjacent points: $r\,n^2\le5D$\\
+\texttt{corollary\_L\_real} & non-zero vectors in $\R^d$ indexed by the $3$-subsets of $[t]$, orthogonal
+when two subsets share one element: $\floor{t/3}^2\le5d$ \ (\texttt{\_nine}: $\le9d$)\\
+\texttt{corollary\_L\_complex\_hermitian}$^{\ast}$ & the same in $\C^d$ with the Hermitian form\\
+\texttt{corollary\_L\_projective\_complex}$^{\ast}$ & complex subspaces of dimension $r$ indexed by the
+$3$-subsets, orthogonal when two subsets share one element: $r\floor{t/3}^2\le5\dim_\C E$
+(Corollary~\ref{cor:proj} for ranges)\\
+\texttt{upper\_bound\_triples}$^{\ast}$ & a representation of $\Gt$ by non-zero vectors of $\R^{t^2}$ exists\\
+\bottomrule
+\end{tabular}
+\end{center}
+($^{\ast}$: in the second file.) The statement about the quantity of Problem~1 of~\cite{HI} reads, with the
+Unicode symbols of Lean transliterated:
+\begin{verbatim}
+theorem corollary_L_real {t d : Nat}
+    (v : {A : Finset (Fin t) // A.card = 3} -> EuclideanSpace Real (Fin d))
+    (h_ne : forall A, v A != 0)
+    (h_orth : forall A B, (A.1 inter B.1).card = 1 ->
+                inner Real (v A) (v B) = 0) :
+    (t / 3) ^ 2 <= 5 * d
+\end{verbatim}
+Here \texttt{t / 3} is the division of natural numbers. Together with \texttt{upper\_bound\_triples} (a
+representation by non-zero vectors indexed by $\texttt{Fin}\ t\times\texttt{Fin}\ t$, that is, in dimension
+$t^2$) it gives $\floor{t/3}^2/5\le d_\R(t)\le t^2$; the minimum $d_\R(t)$ itself is not defined in the Lean
+files.
+
+\paragraph{Checks.} Each file was compiled by the Lean kernel twice, by the process that wrote it and in an
+independent re-run, with exit code $0$ and no warning. For every declaration of the table,
+\texttt{\#print axioms} reports exactly \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+As a negative control, a file that states \texttt{theorem\_L\_real} and proves it by \texttt{sorry} is
+reported as depending on \texttt{sorryAx}. A further theorem shows that the hypotheses of
+\texttt{theorem\_L\_real} can be satisfied for every $n$, so that statement is not vacuous.
+\input{PAPER_TR26_151_PROBLEM1_audit.tex}
+
+\paragraph{What is not formalised.} The formal proof follows Section~\ref{sec:proof} in the frame form
+($u(p,k)$ in place of $U_p$) and over $\R$; the complex statements are derived inside Lean from the real ones
+(a complex subspace of dimension $r$ is a real subspace of dimension $2r$), not by repeating the proof over
+$\C$. The following are \emph{not} formalised: the definitions of $\xi_f$ and $\chi_q$ and the inequality
+$\xi_f\le\chi_q$ quoted from~\cite{MR}; the passage from complex projectors with $P_AP_B=0$ to orthogonal
+ranges (formalised over $\R$ only); Remark~\ref{rem:k}; the statements of Section~\ref{sec:mink}; and all of
+Section~\ref{sec:linear} (the certificates of Theorem~\ref{thm:cert} are checked by exact-arithmetic scripts,
+not by Lean). The declarations marked $^{\ast}$ were added after the first audit; a second isolated
+reader then compared them with the mathematics (\texttt{referee\_g11}) and found them aligned, with caveats
+about coverage that are all listed in this paragraph. A build kit for a clean machine
+(\texttt{lakefile.toml}, \texttt{lean-toolchain}, \texttt{README\_BUILD.md}) is provided but was not executed;
+the checks above were run against an existing Mathlib build. No proof checker other than the Lean kernel was
+used.

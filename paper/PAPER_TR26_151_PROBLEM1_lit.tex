@@ -1,0 +1,60 @@
+% Section "Related work, remarks and open questions" of PAPER_TR26_151_PROBLEM1.tex (same header and claim
+% boundary as the main file). Status of the citations: [HI] read in full; [Ha] statement read; [MR], [CMNSW],
+% [GdLL]: statements reported by a literature agent that read the arXiv versions (QUANTUM_PARAMETERS_CHECK_
+% 20261126.md); [LCLL], [HT], [GH]: reported by a search agent, abstracts or snippets only
+% (NOVELTY_SEARCH_20261126.md). None of the last three is used in a proof.
+
+\paragraph{The problem and the earlier bounds.}
+Problem~1 is stated in Section~5 of~\cite{HI}; the report page showed no revision and no comment on
+26~November 2026. The lower bound of~\cite{HI} for real representations of Cayley-type graphs is a linear
+programme which, by their Lemma~22, equals the Lov\'asz number. Bounds beyond the Lov\'asz number for the
+dimension of orthogonal representations are known from topological arguments~\cite{Ha} (for Kneser-type
+graphs; see also~\cite{GH}). Any argument that does not use the positivity of the form is limited to $t+1$ for
+$\Gt$, by the complex bilinear representation; Section~\ref{sec:mink} locates the single place where the
+proof of Theorem~\ref{thm:L} uses it.
+
+\paragraph{Projective rank and quantum chromatic number.}
+Following Man\v{c}inska and Roberson~\cite[Section~6]{MR}, a $d/r$-representation of a graph assigns to each
+vertex a projector of rank $r$ in $M_d(\C)$ so that adjacent vertices get orthogonal projectors; the projective
+rank $\xi_f$ is the infimum of $d/r$. They prove $\bar\vartheta\le\xi_f$ \cite[Theorem~6.4]{MR} and
+$\xi_f\le\chi_q$ \cite[Lemma~6.2]{MR} (numbering of arXiv version~2), where $\chi_q$ is the quantum chromatic number of~\cite{CMNSW}; see also
+\cite[Section~3]{GdLL}. Both parameters are monotone under taking subgraphs. Corollary~\ref{cor:proj} is
+Theorem~\ref{thm:L} over $\C$ read with these definitions. Together with $\chi_q\le\chi\le\binom t2$ it gives
+$\chi_q(J(t,3,1))=\Theta(t^2)$ and $\xi_f(J(t,3,1))=\Theta(t^2)$, while $\bar\vartheta(J(t,3,1))$ is of order
+$t$: for this family the projective rank is far from the Lov\'asz bound. Exact quantum chromatic numbers of
+generalised Johnson graphs in other parameter ranges are the subject of~\cite{LCLL}; minimum-rank parameters
+of complements of threshold Kneser graphs are computed in~\cite{HT}.
+
+\paragraph{Novelty.}
+A search of the literature made on 26~November 2026 (queries on the cube graph under several names, on
+orthogonal, minimum semidefinite and projective rank of Hamming and Johnson-type graphs, and on citations
+of~\cite{HI}) found no earlier bound of order $n^2$ for $\Hn$ or of order $t^2$ for $\Gt$. A search that
+finds nothing does not prove novelty.
+
+\paragraph{Remarks and open questions.}
+\begin{enumerate}
+\item \emph{Constants.} For the cube graph, $n^2/5\le\dim\le n^2$. Its independence number is
+$\max(n,2n-2,3n-6)$ (three pieces of lines in the three directions), so colourings need at least
+$n^3/(3n-6)$ colours when $n\ge4$; at $n=4$ the chromatic number is $11$. Representations that are invariant under a product
+$\Gamma_1\times\Gamma_2\times\Gamma_3$ of abelian groups acting regularly on the three coordinates need at least
+$2n^2/3$ dimensions; over $\C$ this is attained when $3$ divides $n$ (over $\R$ we checked $n=3,6,9$).
+Invariant representations are not optimal: at $n=4$ they need $14$ dimensions, and a colouring needs $11$. For $\Gt$ the truth
+lies between $\floor{t/3}^2/5$ and $\binom t2$. What is the right constant?
+\item \emph{Small cases.} $d_\R(9)=8$, and $11\le d_\R(10)\le15$. Every representation of $G_{10}$ whose
+restriction to some nine points is the $E_8$ configuration has dimension at least $15$: the vector of
+$\{a,b,10\}$ is orthogonal to the vectors of the triples of the nine points that meet $\{a,b\}$ once, and
+these span the whole $8$-dimensional space (a rank computation on integers); so the vectors of the triples
+through the point $10$ lie in the orthogonal complement of that space, and they need $7$ dimensions by
+Haviv's theorem for the Kneser graph of pairs \cite[Corollary~3.3]{Ha}. We do not know $d_\R(10)$.
+\item \emph{Other problems of~\cite{HI}.} We do not see how to apply the argument to their Problems~2 and~3.
+For Problem~2 (vectors of $\{\pm1\}^n$, orthogonal at Hamming distance divisible by four) we tried the version
+of the argument in which lines and layers are cosets of subgroups of $\mathbb F_2^n$; there the hypotheses
+force the sum of two of the subgroups to be a doubly even code, and the resulting bound stays below the
+clique bound $2^{n/2}$ (this computation was not refereed). For
+Problem~3 (maps of the sphere that send pairs with inner product $\delta$ to orthogonal vectors) the argument
+applies to any copy of a cube graph inside the graph of the sphere and bounds the dimension from below by one
+fifth of the square of its side; we found no configuration for which this improves on the exponential bounds of~\cite{HI}.
+\item \emph{The moment method.} The bounds of Section~\ref{sec:linear} are obtained from moments of order at
+most three and hold for projectors; by Theorem~\ref{thm:L} the projective cost is of order $t^2$, so that
+hierarchy is far from the truth at low order. Does a fixed level of it give a superlinear bound?
+\end{enumerate}
