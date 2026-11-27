@@ -1,0 +1,19 @@
+# independent re-run by the main session, 2026-11-26 15:54:35 -0600
+# sha256 before: 3019bee14ed972d72cf0759bc36aca2c096a9d742649efff15afcbf06b3cef92
+'TheoremL.core_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_real_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_real_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_complex_hermitian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projectors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projective_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.hypotheses_satisfiable' depends on axioms: [propext, Classical.choice, Quot.sound]
+# exit code: 0
+# seconds: 38
+# sha256 after: 3019bee14ed972d72cf0759bc36aca2c096a9d742649efff15afcbf06b3cef92
+# --- negative control ---
+C:/AQiDA/Easy_Problems/RESEARCH_NOTES/FINAL_SYNTHESIS_20261125/lean_theorem_l/NegativeControl.lean:30:8: warning: declaration uses `sorry`
+'TheoremLNegativeControl.theorem_L_real' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# exit code: 0

@@ -1,0 +1,22 @@
+# axioms_output.txt : complete output of the final clean compile of TheoremL.lean
+# date (local): 2026-11-26 15:46:49 -0600
+# lean: Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)
+# command (run from /c/AQiDA/Easy_Problems/aqida_lean_phase_math):
+#   lake env lean -M 2500 "C:/AQiDA/Easy_Problems/RESEARCH_NOTES/FINAL_SYNTHESIS_20261125/lean_theorem_l/TheoremL.lean"
+# sha256(TheoremL.lean) before the run = 3019bee14ed972d72cf0759bc36aca2c096a9d742649efff15afcbf06b3cef92
+# sha256(TheoremL.lean) after the run  = 3019bee14ed972d72cf0759bc36aca2c096a9d742649efff15afcbf06b3cef92
+# lines(TheoremL.lean) = 1065
+# ---- BEGIN stdout+stderr (verbatim) ----
+'TheoremL.core_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_real_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_real_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_complex_hermitian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projectors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projective_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.hypotheses_satisfiable' depends on axioms: [propext, Classical.choice, Quot.sound]
+# ---- END stdout+stderr ----
+# exit code: 0
+# wall-clock: 16 s (imports already in the OS file cache; the first, cold compile of the P1 file took 160 s)

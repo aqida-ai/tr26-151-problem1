@@ -1,1 +1,13 @@
-placeholder
+# negative_control_output.txt : complete output of the compile of NegativeControl.lean
+# date (local): 2026-11-26 15:46:09 -0600
+# command (run from /c/AQiDA/Easy_Problems/aqida_lean_phase_math):
+#   lake env lean -M 2500 "C:/AQiDA/Easy_Problems/RESEARCH_NOTES/FINAL_SYNTHESIS_20261125/lean_theorem_l/NegativeControl.lean"
+# sha256(NegativeControl.lean) = 875d72d4ab36dcc423a99b366066fc6cad037c9641bb9a06008bf5907d2f2a63
+# ---- BEGIN stdout+stderr (verbatim) ----
+C:/AQiDA/Easy_Problems/RESEARCH_NOTES/FINAL_SYNTHESIS_20261125/lean_theorem_l/NegativeControl.lean:30:8: warning: declaration uses `sorry`
+'TheoremLNegativeControl.theorem_L_real' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# ---- END stdout+stderr ----
+# exit code: 0
+# note: a planted sorry does NOT change the exit code; it is detected by the warning and by sorryAx in the axiom list.
+# wall-clock: 13 s
+# RESULT: sorryAx reported (expected): the axiom check detects the faked proof.

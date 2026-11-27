@@ -1,0 +1,24 @@
+# independent re-run of TheoremL_LayerRanks.lean by the main session, 2026-11-26 16:10:38 -0600
+# sha256: a1b16696a0fbef1aec580a126b5a9bd3ca6c0066129296af9e26c32c21adeefd
+# sha256 TheoremL.lean: 3019bee14ed972d72cf0759bc36aca2c096a9d742649efff15afcbf06b3cef92
+# cmp first 49218 bytes: identical
+# forbidden tokens: 0
+'TheoremL.core_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_real_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_real_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_complex_hermitian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projectors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_projective_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.hypotheses_satisfiable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.core_layer_ranks' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_real_layer_ranks' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.theorem_L_real_layer_ranks_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_complex_hermitian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_projective_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.corollary_L_projective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TheoremL.upper_bound_triples' depends on axioms: [propext, Classical.choice, Quot.sound]
+# exit code: 0
+# seconds: 149
