@@ -1,0 +1,23 @@
+# AQIDA_CONSTITUTIONAL_SCOPE: gate | CLAIM_BOUNDARY: release packaging of already recorded results; states nothing new | FALSIFICATION_TESTS: lake build, check_axioms.sh, verify_certificates.py
+#
+# Build kit for a clean machine. NOT executed on the authoring machine: there, the two files were
+# compiled with `lake env lean` against an existing local Mathlib build (see ../README.md).
+# Two independent modules are built; they do not import each other. TheoremL_LayerRanks.lean begins
+# with the full text of TheoremL.lean, so the two must never be imported together.
+# NegativeControl.lean (a planted `sorry`) is NOT part of any library; check_axioms.sh compiles it
+# separately with `lake env lean` and expects `sorryAx`.
+
+name = "theorem_l"
+version = "0.1.0"
+defaultTargets = ["TheoremL", "TheoremL_LayerRanks"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.30.0-rc2"
+
+[[lean_lib]]
+name = "TheoremL"
+
+[[lean_lib]]
+name = "TheoremL_LayerRanks"

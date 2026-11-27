@@ -1,0 +1,14 @@
+# AQIDA_CONSTITUTIONAL_SCOPE: gate | CLAIM_BOUNDARY: release packaging of already recorded results; states nothing new | FALSIFICATION_TESTS: lake build, check_axioms.sh, verify_certificates.py
+# Command, run in the folder lean/ on 2026-11-26 (Git Bash, sha256sum (GNU coreutils) 8.32):
+#   sha256sum TheoremL.lean TheoremL_LayerRanks.lean NegativeControl.lean lean-toolchain
+# Expected (from the build record): TheoremL.lean 3019bee14ed972d72cf0759bc36aca2c096a9d742649efff15afcbf06b3cef92
+#                                  TheoremL_LayerRanks.lean a1b16696a0fbef1aec580a126b5a9bd3ca6c0066129296af9e26c32c21adeefd
+# Output (verbatim):
+3019bee14ed972d72cf0759bc36aca2c096a9d742649efff15afcbf06b3cef92 *TheoremL.lean
+a1b16696a0fbef1aec580a126b5a9bd3ca6c0066129296af9e26c32c21adeefd *TheoremL_LayerRanks.lean
+875d72d4ab36dcc423a99b366066fc6cad037c9641bb9a06008bf5907d2f2a63 *NegativeControl.lean
+ce4c4e3d87434b9663f46de25ce34b48a0cf0d392e0a320a0787b4674a2d7b61 *lean-toolchain
+# Line counts (wc -l):
+#   1065 TheoremL.lean
+#   1354 TheoremL_LayerRanks.lean
+#   2419 total
