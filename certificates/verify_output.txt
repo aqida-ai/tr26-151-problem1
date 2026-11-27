@@ -1,1 +1,173 @@
-placeholder
+verify_certificates.py: standalone exact re-check (Python 3.12.10)
+==============================================================================
+t = 10   file: three_point_cert_t10_proj.json
+  row 1: block star4  size 117  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 791478*w1 + -25203118*w3 + -24843098*Ts + -5466384*Tk + -51874308*Tp + -10416436*Td + 11687404 >= 0
+  row 2: block Fano   size 114  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -53968752*w1 + -22046660*w3 + 22577190*Ts + -3841638*Tk + 56206652*Tp + 6622212*Td + 10463854 >= 0
+  row 3: block Fano   size 114  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 39789162*w1 + 64611477*w3 + -6479676*Ts + -2160648*Tk + -60788952*Tp + -6526464*Td + -25179454 >= 0
+  row 4: block star4  size 117  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 979309*w1 + -18770021*w3 + -18860898*Ts + -4053432*Tk + -39431092*Tp + -7567656*Td + 8734557 >= 0
+  row 5: block vertex size  57  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -125811*w1 + -12431685*w3 + 1134*Ts + 378*Tk + 16796220*Tp + 5433260*Td + 1000000 >= 0
+  row 6: block vertex size  57  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -831600*w1 + -11293485*w3 + 50400*Ts + 16800*Tk + 16131780*Tp + 4386060*Td + 1000000 >= 0
+  row 7: block Fano   size 114  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -78666722*w1 + -39718380*w3 + 31881854*Ts + 27561116*Tk + 16257896*Tp + -36296094*Td + 15596192 >= 0
+  sum of multiplier * cut = 1*d + 0*w1 + ... + 0*Td: True
+  weighted sum is the inequality d - beta >= 0 with
+    beta (exact) = 52215940589007163611891977374295918796707339/5152666649412523885628283331366631754000000
+    beta (decimal, 12 digits) = 10.133770364314
+    beta equals stored bound: True
+    integer bound implied: d >= ceil(beta) = 11
+t = 10: certificate PASS
+==============================================================================
+t = 11   file: three_point_cert_t11_proj.json
+  row 1: block vertex size  81  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -3287016*w1 + -12040224*w3 + 846888*Ts + 241968*Tk + 24514560*Tp + 7277760*Td + 1000000 >= 0
+  row 2: block vertex size  81  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 0*w1 + 13332521*w3 + 0*Ts + 0*Tk + -39997554*Tp + -13332518*Td + 0 >= 0
+  row 3: block vertex size  81  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -3331584*w1 + -11940936*w3 + 870912*Ts + 248832*Tk + 24394440*Tp + 7150640*Td + 1000000 >= 0
+  row 4: block vertex size  81  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -3287016*w1 + -12139400*w3 + 846888*Ts + 241968*Tk + 24826200*Tp + 7406000*Td + 1000000 >= 0
+  row 5: block Fano   size 159  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 68023836*w1 + 134135820*w3 + -17635212*Ts + -5066376*Tk + -164390436*Tp + -35979048*Td + -34237336 >= 0
+  row 6: block Fano   size 159  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 67413240*w1 + 133546056*w3 + -17207064*Ts + -4940880*Tk + -162503460*Tp + -35303352*Td + -34172176 >= 0
+  row 7: block Fano   size 159  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -65204459*w1 + -40435955*w3 + 22973150*Ts + 24400340*Tk + 4340910*Tp + -46941204*Td + 14077703 >= 0
+  sum of multiplier * cut = 1*d + 0*w1 + ... + 0*Td: True
+  weighted sum is the inequality d - beta >= 0 with
+    beta (exact) = 6970956021421680264112667048817/511263192319647595739851000000
+    beta (decimal, 12 digits) = 13.634769970030
+    beta equals stored bound: True
+    integer bound implied: d >= ceil(beta) = 14
+t = 11: certificate PASS
+==============================================================================
+t = 12   file: three_point_cert_t12_proj.json
+  row 1: block vertex size 112  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 870912*w1 + -22593900*w3 + 55296*Ts + 13824*Tk + 24774120*Tp + 35322000*Td + 1000000 >= 0
+  row 2: block Fano   size 214  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + -40553523*w1 + -28268506*w3 + 2103612*Ts + -4602402*Tk + 56257152*Tp + -121271080*Td + -5413343 >= 0
+  row 3: block Fano   size 214  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 53042508*w1 + 164426346*w3 + -7550172*Ts + -1888488*Tk + -156773232*Tp + -57753360*Td + -35795842 >= 0
+  row 4: block Fano   size 214  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -79421964*w1 + -41456789*w3 + 32026956*Ts + 31012112*Tk + -2199830*Tp + -54299580*Td + 15811986 >= 0
+  row 5: block vertex size 112  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 0*w1 + 11622545*w3 + 0*Ts + 0*Tk + -34867626*Tp + -11622538*Td + 0 >= 0
+  row 6: block vertex size 112  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -323028*w1 + -20127744*w3 + 7776*Ts + 1944*Tk + 27095040*Tp + 27525120*Td + 1000000 >= 0
+  row 7: block Fano   size 214  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 57558348*w1 + 160756876*w3 + -24954972*Ts + -9167088*Tk + -295956612*Tp + -151667880*Td + -29756402 >= 0
+  sum of multiplier * cut = 1*d + 0*w1 + ... + 0*Td: True
+  weighted sum is the inequality d - beta >= 0 with
+    beta (exact) = 99599782261663840024849997376510120350261/6476188842479089333389822326015663500000
+    beta (decimal, 12 digits) = 15.379382023014
+    beta equals stored bound: True
+    integer bound implied: d >= ceil(beta) = 16
+t = 12: certificate PASS
+==============================================================================
+t = 13   file: three_point_cert_t13_proj.json
+  row 1: block vertex size 151  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 1150830*w1 + -24734280*w3 + 97470*Ts + 21660*Tk + 19502280*Tp + 49900200*Td + 1000000 >= 0
+  row 2: block vertex size 151  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -4883250*w1 + -11471880*w3 + 1950750*Ts + 433500*Tk + 27042120*Tp + 10084200*Td + 1000000 >= 0
+  row 3: block Fano   size 280  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 52340760*w1 + 207713280*w3 + -6711768*Ts + -1495536*Tk + -183217104*Tp + -100524480*Td + -38774548 >= 0
+  row 4: block vertex size 151  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 13515774*w1 + 12578161*w3 + -13515774*Ts + 27031548*Tk + -100640672*Tp + -188672266*Td + 0 >= 0
+  row 5: block vertex size 151  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -15004530*w1 + 17644920*w3 + 23179230*Ts + 5150940*Tk + -92143800*Tp + 21172200*Td + 1000000 >= 0
+  row 6: block Fano   size 280  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 75076*d + -280290978*w1 + -492061536*w3 + -1438920*Ts + -73440528*Tk + 468686148*Tp + -494394600*Td + 92501081 >= 0
+  row 7: block Fano   size 280  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 484416*d + -306100440*w1 + -460391520*w3 + 10158120*Ts + -74899440*Tk + 535570560*Tp + -576149840*Td + 86069660 >= 0
+  sum of multiplier * cut = 1*d + 0*w1 + ... + 0*Td: True
+  weighted sum is the inequality d - beta >= 0 with
+    beta (exact) = 2046184297821696510438001300616544450/122234045072442409990581752399805239
+    beta (decimal, 12 digits) = 16.739888601486
+    beta equals stored bound: True
+    integer bound implied: d >= ceil(beta) = 17
+t = 13: certificate PASS
+==============================================================================
+t = 14   file: three_point_cert_t14_proj.json
+  row 1: block vertex size 199  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -917532*w1 + -23821875*w3 + 64680*Ts + 12936*Tk + 30591000*Tp + 51975000*Td + 1000000 >= 0
+  row 2: block vertex size 199  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 4640592*w1 + -37224000*w3 + 1525920*Ts + 305184*Tk + -7603200*Tp + 133056000*Td + 1000000 >= 0
+  row 3: block Fano   size 358  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + -9336096*w1 + 208739664*w3 + 9425808*Ts + -19456416*Tk + -122662512*Tp + -317689344*Td + -27424096 >= 0
+  row 4: block vertex size 199  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 10754874*w1 + 10383872*w3 + -10754874*Ts + 21509748*Tk + -84656154*Tp + -218061026*Td + 0 >= 0
+  row 5: block vertex size 199  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 15838248*w1 + 15309590*w3 + -15838248*Ts + 31676496*Tk + -124626552*Tp + -321501092*Td + 0 >= 0
+  row 6: block Fano   size 358  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 45777186*w1 + 218498567*w3 + -9520308*Ts + -11590656*Tk + -211174908*Tp + -132666716*Td + -37002994 >= 0
+  row 7: block Fano   size 358  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 118336*d + -795132366*w1 + -1354884041*w3 + 102085368*Ts + -392579544*Tk + 1003928016*Tp + -1078058604*Td + 254154586 >= 0
+  sum of multiplier * cut = 1*d + 0*w1 + ... + 0*Td: True
+  weighted sum is the inequality d - beta >= 0 with
+    beta (exact) = 8493472938343459097620325472222443230771/460879302709789826461624171138545885772
+    beta (decimal, 12 digits) = 18.428844359912
+    beta equals stored bound: True
+    integer bound implied: d >= ceil(beta) = 19
+t = 14: certificate PASS
+==============================================================================
+t = 15   file: three_point_cert_t15_proj.json
+  row 1: block vertex size 257  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 288576*w1 + -30947620*w3 + 6336*Ts + 1152*Tk + 28185300*Tp + 98479920*Td + 1000000 >= 0
+  row 2: block vertex size 257  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -3783024*w1 + -18513220*w3 + 1154736*Ts + 209952*Tk + 38568420*Tp + 34169520*Td + 1000000 >= 0
+  row 3: block Fano   size 449  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 36456840*w1 + 332254552*w3 + 561708*Ts + -6935544*Tk + -244042764*Tp + -356509104*Td + -42885164 >= 0
+  row 4: block vertex size 257  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 12653010*w1 + 12777448*w3 + -12653010*Ts + 25306020*Tk + -103810022*Tp + -357768042*Td + 0 >= 0
+  row 5: block vertex size 257  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 15386469*w1 + 15544716*w3 + -15386466*Ts + 30772938*Tk + -126212518*Tp + -435251546*Td + 0 >= 0
+  row 6: block Fano   size 449  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 7569*d + -511102704*w1 + -763701568*w3 + 125634600*Ts + -307784400*Tk + 340152624*Tp + -681809520*Td + 152497345 >= 0
+  row 7: block vertex size 257  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -20365884*w1 + 49111920*w3 + 46047276*Ts + 8372232*Tk + -362672640*Tp + 207641280*Td + 1000000 >= 0
+  sum of multiplier * cut = 1*d + 0*w1 + ... + 0*Td: True
+  weighted sum is the inequality d - beta >= 0 with
+    beta (exact) = 592926092057463498712592275362599636806643/29185156202273000441579242681263258531349
+    beta (decimal, 12 digits) = 20.316015715252
+    beta equals stored bound: True
+    integer bound implied: d >= ceil(beta) = 21
+t = 15: certificate PASS
+==============================================================================
+t = 16   file: three_point_cert_t16_proj.json
+  row 1: block vertex size 326  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -389025*w1 + -32752434*w3 + 11700*Ts + 1950*Tk + 34929180*Tp + 119467920*Td + 1000000 >= 0
+  row 2: block vertex size 326  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -2153424*w1 + -26797056*w3 + 366912*Ts + 61152*Tk + 42831360*Tp + 79073280*Td + 1000000 >= 0
+  row 3: block vertex size 326  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 14866860*w1 + 15982765*w3 + -14866860*Ts + 29733720*Tk + -124304360*Tp + -575378708*Td + 0 >= 0
+  row 4: block Fano   size 554  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + 28362285*w1 + 414850170*w3 + 4789764*Ts + -14636706*Tk + -304885476*Tp + -581822640*Td + -44755207 >= 0
+  row 5: block vertex size 326  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + 15510216*w1 + 16684768*w3 + -15510216*Ts + 31020432*Tk + -129635832*Tp + -600650794*Td + 0 >= 0
+  row 6: block Fano   size 554  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 1000000*d + -219574635*w1 + 201622918*w3 + 86299416*Ts + -172847850*Tk + -326288088*Tp + -1354916304*Td + 19990117 >= 0
+  row 7: block vertex size 326  re-derived cut equals stored cut: True  multiplier > 0: True
+         cut: 0*d + -25428000*w1 + 258922664*w3 + 468000000*Ts + 78000000*Tk + -5831345520*Tp + 6464377920*Td + 682276 >= 0
+  sum of multiplier * cut = 1*d + 0*w1 + ... + 0*Td: True
+  weighted sum is the inequality d - beta >= 0 with
+    beta (exact) = 1865245491308094936807936491254134670719391/83734616060528812977228153222278370000000
+    beta (decimal, 12 digits) = 22.275679749457
+    beta equals stored bound: True
+    integer bound implied: d >= ceil(beta) = 23
+t = 16: certificate PASS
+==============================================================================
+SUMMARY
+  t   status  beta (decimal)    integer bound   paper's integer bound
+  10  PASS    10.133770364     11              11  (same)
+  11  PASS    13.634769970     14              14  (same)
+  12  PASS    15.379382023     16              16  (same)
+  13  PASS    16.739888601     17              17  (same)
+  14  PASS    18.428844360     19              19  (same)
+  15  PASS    20.316015715     21              21  (same)
+  16  PASS    22.275679749     23              23  (same)
+OVERALL: ALL SEVEN CERTIFICATES PASS
