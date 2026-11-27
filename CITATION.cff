@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite the paper as given under preferred-citation."
+type: software
+title: "A quadratic lower bound for real orthogonal representations of the graph of triples: Lean 4 formalisation and certificates"
+authors:
+  - family-names: "Khan"
+    given-names: "Babar Ahmed"
+date-released: 2026-11-26
+version: "draft-2026-11-26"
+license: MIT
+# TODO (owner): replace with the real repository URL once the repository exists.
+repository-code: "https://github.com/aqida-ai/TODO-repository-name"
+# TODO (owner): add the Zenodo DOI once it has been created, as an uncommented line of the form
+# doi: "10.5281/zenodo.TODO"
+# (left as a comment because a non-DOI value would make this file invalid).
+keywords:
+  - "orthogonal representations"
+  - "graph of triples"
+  - "Lean 4"
+  - "Mathlib"
+abstract: "Lean 4 formalisation and exact certificates for a draft paper (26 November 2026, not peer reviewed) proving that non-zero real vectors indexed by the 3-subsets of [t], orthogonal whenever two subsets share exactly one element, need dimension at least floor(t/3)^2/5. No human mathematician has checked the work; it was produced with an AI system (Claude) under the direction of the author."
+preferred-citation:
+  type: unpublished
+  title: "A quadratic lower bound for real orthogonal representations of the graph of triples"
+  authors:
+    - family-names: "Khan"
+      given-names: "Babar Ahmed"
+  year: 2026
+  notes: "Draft of 26 November 2026. Not peer reviewed."
+  # TODO (owner): add the DOI here as well once it exists.
