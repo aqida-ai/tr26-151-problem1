@@ -1,7 +1,7 @@
 # AQIDA_CONSTITUTIONAL_SCOPE: gate | CLAIM_BOUNDARY: release packaging of already recorded results; states nothing new | FALSIFICATION_TESTS: lake build, check_axioms.sh, verify_certificates.py
 #
-# NOT EXECUTED: this workflow was written on the authoring machine and has never been run, on GitHub
-# or elsewhere. Its first run is the first clean-machine build of the Lean files.
+# First run: 27 November 2026 (run 1, commit 7592328); every step succeeded. It was the first clean-machine
+# build of the Lean files. Record: lean/records/ci_run_1.md.
 #
 # Plain shell steps are used for Lean. The action `leanprover/lean-action@v1` (with
 # `lake-package-directory: lean`) is the intended alternative; it is not used here because its input
