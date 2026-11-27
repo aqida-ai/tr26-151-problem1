@@ -3,8 +3,10 @@
 # MANIFEST
 
 Every file of this package except the two manifest files, with its size in bytes and its SHA-256.
-Regenerated on 2026-11-27 with Python hashlib after the first run on GitHub Actions was recorded
-(`lean/records/ci_run_1.md`); the first manifest is kept as `MANIFEST_before_records.md`.
+Regenerated on 2026-11-27 with Python hashlib after the paper's section on the Lean check was updated to
+cite the first run on GitHub Actions (`lean/records/ci_run_1.md`). Two rows changed against the manifest
+of that run: `paper/PAPER_TR26_151_PROBLEM1_lean.tex` and `paper/PAPER_TR26_151_PROBLEM1.pdf`. The first
+manifest is kept as `MANIFEST_before_records.md`.
 
 | file | bytes | SHA-256 |
 |---|---|---|
@@ -37,9 +39,9 @@ Regenerated on 2026-11-27 with Python hashlib after the first run on GitHub Acti
 | `lean/records/negative_control_output.txt` | 975 | `0bd48830ed7de50ef81abb26756bcb34e6a40e825d076329159df3c1dc29a672` |
 | `lean/records/verify_by_main_session.txt` | 1457 | `1dcf8c30bfe4e7689761e6a2c00c65e053a91c843f4625bcd7576720e76c1215` |
 | `lean/records/verify_layer_ranks_by_main_session.txt` | 1925 | `ebab1d50bd2f5b9054906b491774a6c87b4576b68b76bf5af51e9a74d6cc7591` |
-| `paper/PAPER_TR26_151_PROBLEM1.pdf` | 497439 | `78026fdb082bb26f0a23148191ed08c18308b2ee94c165511f05d74f941876d4` |
+| `paper/PAPER_TR26_151_PROBLEM1.pdf` | 499064 | `32e320be06891368642c07d033fc59c11a02088c61cefc70625ed60226bec929` |
 | `paper/PAPER_TR26_151_PROBLEM1.tex` | 25463 | `d9fa58f867b594b54a30f355f28c124f8fcfa7f876b701858191bd80aadea191` |
 | `paper/PAPER_TR26_151_PROBLEM1_audit.tex` | 800 | `ff6d909090cc47f33fdc3afd4e94d0b4488bc7ed47d8cd04e113b1c350c7c001` |
 | `paper/PAPER_TR26_151_PROBLEM1_bib.tex` | 1404 | `edbf5891cfb124f6726adb3a4203137aae8b09753db708182f1820f0a6d415b7` |
-| `paper/PAPER_TR26_151_PROBLEM1_lean.tex` | 5260 | `a7f75253fa939f043e6e20ff6256242f3b8c1532f7cf6e7dcec802864168b83d` |
+| `paper/PAPER_TR26_151_PROBLEM1_lean.tex` | 6312 | `3d16ed58c7e829d2bc63726165a2599747d03f2d2afcc2ce81d74cb4aaa71cd5` |
 | `paper/PAPER_TR26_151_PROBLEM1_lit.tex` | 5300 | `ec1b1e3abd09f2a46e0b93f26298d87789f06a5d6db4531214f5ee68115a739c` |
